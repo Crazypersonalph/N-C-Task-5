@@ -22,5 +22,8 @@ def store_game(cur: sqlite3.Cursor, score: int, rolls: list, holds: list):
     INSERT INTO history (score, date, rolls, holds) VALUES
         (?, ?, ?, ?)
 """, (score, datetime.datetime.now(datetime.timezone.utc).isoformat(), str(rolls), str(holds)))
+    clean()
+    
+def clean():
     con.commit()
     con.close()
