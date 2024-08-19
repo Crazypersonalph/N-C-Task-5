@@ -1,6 +1,6 @@
 import sqlite3
 import datetime
-con = any
+con: sqlite3.Connection
 
 def grab_db(database: str):
     global con
@@ -23,7 +23,7 @@ def store_game(cur: sqlite3.Cursor, score: int, rolls: list, holds: list):
         (?, ?, ?, ?)
 """, (score, datetime.datetime.now(datetime.timezone.utc).isoformat(), str(rolls), str(holds)))
     clean()
-    
+
 def clean():
     con.commit()
     con.close()
