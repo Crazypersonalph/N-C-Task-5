@@ -1,3 +1,4 @@
 {
-    "num_dice": 3
+    "num_dice": 5,
+    "db_name": "yo.sqlite3"
 }
