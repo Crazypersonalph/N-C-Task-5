@@ -24,6 +24,10 @@ def store_game(cur: sqlite3.Cursor, score: int, rolls: list, holds: list):
 """, (score, datetime.datetime.now().astimezone().replace(microsecond=0).isoformat(), str(rolls), str(holds)))
     clean()
 
+def get_last_result(cur: sqlite3.Cursor):
+    cur.execute('SELECT * FROM history ORDER BY id DESC LIMIT 1')
+    return cur.fetchone()
+
 def clean():
     con.commit()
     con.close()
