@@ -26,16 +26,18 @@ except:
     pass
 
 def ask_for_hold(rolled_list: list):
+    held_real = []
     held_order = input('Which number(s) (in its order) do you want to hold (separated by a comma)? ')
     try:
         held_order_list = [int(i) for i in held_order.split(',')]
         if len(held_order_list) > 0 and all(i > 0 for i in held_order_list):
-
             for i in held_order_list:
                 held_numbers.append(rolled_list[i-1])
 
             for i in held_order_list:
-                holds.append(rolled_list[i-1])
+                held_real.append(rolled_list[i-1])
+                
+            holds.append(held_real)
         else:
             raise
     except:
