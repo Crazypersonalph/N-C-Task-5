@@ -2,7 +2,7 @@ from yahtzo.utils.read_config import read_config
 from yahtzo.utils.roll_dice import roll_dice
 from yahtzo.utils.calculate import calculate
 
-from yahtzo.database.db import get_last_result, grab_db, store_game
+from yahtzo.database.db import get_last_result, grab_db, store_game, clean
 
 class StopAdv(Exception):
     pass
@@ -26,15 +26,20 @@ except:
     pass
 
 def ask_for_hold(rolled_list: list):
-    held_order = int(input('Which number (in its order) do you want to hold? '))
+    held_order = input('Which number(s) (in its order) do you want to hold (separated by a comma)? ')
     try:
-        if held_order > 0:
-            held_numbers.append(rolled_list[abs(held_order-1)])
-            holds.append(rolled_list[abs(held_order-1)])
+        held_order_list = [int(i) for i in held_order.split(',')]
+        if len(held_order_list) > 0 and all(i > 0 for i in held_order_list):
+
+            for i in held_order_list:
+                held_numbers.append(rolled_list[i-1])
+
+            for i in held_order_list:
+                holds.append(rolled_list[i-1])
         else:
             raise
     except:
-        print('Invalid number. Please try again.')
+        print('Invalid number(s). Please try again.')
         ask_for_hold(rolled_list)
 
 def play_game():
@@ -42,24 +47,23 @@ def play_game():
     global rolled_list
     global number_of_dice
     while i < num_dice:
+        number_of_dice = num_dice - len(held_numbers)
         rolled_list = roll_dice(number_of_dice)
+
         try:
-            rolled_list.append(held_numbers.pop(0))
+            for x in held_numbers:
+                rolled_list.append(x)
         except:
             pass
 
+        held_numbers.clear()
         rolls.append(rolled_list)
 
-        if i == num_dice-1:
-            break
-
         print(f'You rolled {rolled_list}')
-
-        ask_for_hold(rolled_list)
+        if i < num_dice-1:
+            ask_for_hold(rolled_list)
 
         i+=1
-        if i == 1:
-            number_of_dice -= 1
 
 def start_menu():
     try:
@@ -87,7 +91,9 @@ def start_menu():
         start_menu()
 
 try:
-    while True:        
+    while True:       
         start_menu()
 except StopAdv:
     pass
+
+clean()
