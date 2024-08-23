@@ -78,8 +78,13 @@ def start_menu():
 
             store_game(db, score, rolls, holds)
         elif menu_1 == 2:
+            hist_exists: bool = False
             for i in db.execute('SELECT * FROM history').fetchall():
                 print(f'Game {i[0]}: {i}')
+                hist_exists = True
+            if not hist_exists:
+                print('Nothing to see here.')
+            
 
         elif menu_1 == 3:
             raise StopAdv
