@@ -4,6 +4,8 @@ from yahtzo.utils.calculate import calculate
 
 from yahtzo.database.db import get_last_result, grab_db, store_game, clean
 
+import base64
+
 class StopAdv(Exception):
     pass
 
@@ -77,7 +79,7 @@ def start_menu():
             score = calculate(rolled_list)
             print(f'You scored {score} points!')
 
-            store_game(db, score, rolls, holds)
+            store_game(db, score, rolls, holds, base64.b64encode(str(configuration.config).encode()).decode())
         elif menu_1 == 2:
             hist_exists: bool = False
             for i in db.execute('SELECT * FROM history').fetchall():

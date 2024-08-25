@@ -11,8 +11,6 @@ def read_config(config_file):
     try:
         with open(config_file, 'r') as f:
             config = json.load(f)
-            for i in config:
-                print(i)
             return Config(int(config['num_dice']), str(config['db_name']), config['scoring'], config)
     except:
         config = None

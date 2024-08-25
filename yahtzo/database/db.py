@@ -7,7 +7,7 @@ def grab_db(database: str):
     con = sqlite3.connect(database)
     cur = con.cursor()
     if not check_if_table_exists(cur, 'history'):
-        cur.execute('CREATE TABLE history (id INTEGER PRIMARY KEY, score INTEGER, date TEXT, rolls TEXT, holds TEXT)')
+        cur.execute('CREATE TABLE history (id INTEGER PRIMARY KEY, score INTEGER, date TEXT, rolls TEXT, holds TEXT, current_config TEXT)')
 
     return cur
 
@@ -17,11 +17,11 @@ def check_if_table_exists(cur: sqlite3.Cursor, table_name: str):
         return True
     return False
 
-def store_game(cur: sqlite3.Cursor, score: int, rolls: list, holds: list):
+def store_game(cur: sqlite3.Cursor, score: int, rolls: list, holds: list, current_config: str):
     cur.execute(f"""
-    INSERT INTO history (score, date, rolls, holds) VALUES
-        (?, ?, ?, ?)
-""", (score, datetime.datetime.now().astimezone().replace(microsecond=0).isoformat(), str(rolls), str(holds)))
+    INSERT INTO history (score, date, rolls, holds, current_config) VALUES
+        (?, ?, ?, ?, ?)
+""", (score, datetime.datetime.now().astimezone().replace(microsecond=0).isoformat(), str(rolls), str(holds), current_config))
 
 def get_last_result(cur: sqlite3.Cursor):
     cur.execute('SELECT * FROM history ORDER BY id DESC LIMIT 1')
