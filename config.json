@@ -1,4 +1,10 @@
 {
     "num_dice": 3,
-    "db_name": "yahtzo.db"
+    "db_name": "yahtzo.db",
+    "scoring": {
+        "all-six": 100,
+        "all-of-kind": 70,
+        "straight": 50,
+        "full-house": 50
+    }
 }

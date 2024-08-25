@@ -12,10 +12,11 @@ held_numbers: list = []
 rolls: list = []
 holds: list = []
 
-config_file, num_dice, db_name = read_config('config.json')
+configuration = read_config('config.json')
 
-db = grab_db(db_name)
+db = grab_db(configuration.db_name)
 
+num_dice = configuration.num_dice
 number_of_dice = num_dice
 
 
