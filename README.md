@@ -1,5 +1,5 @@
 # Yahtzo
-Reminder to make the docs
 
-## How to play
-Run the entrypoint `tui.py` to play in your terminal.
+<u> Get started by running `tui.py` in your favourite Python interpreter</u>
+
+Checkout `DOCS.md` to see all the documentation (including how to play)!
