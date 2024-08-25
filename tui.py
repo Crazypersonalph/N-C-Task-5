@@ -20,8 +20,7 @@ configuration = read_config('config.json') # Read the configuration file
 
 db = grab_db(configuration.db_name) # Grab the database
 
-num_dice = configuration.num_dice # Get the number of dice from the configuration file
-number_of_dice = num_dice # Set the number of dice (used in the game itself) to the number of dice (config file)
+num_dice = configuration.num_dice # Get the number of dice from the configuration file of dice (config file)
 
 
 print("Welcome to Yahtzo! Let's begin!")
@@ -51,8 +50,8 @@ def ask_for_hold(rolled_list: list): # Define a function to ask the player which
 
 def play_game(): # Define a function to play the game
     i = 0
-    global rolled_list # Define a global variable to hold the rolled numbers
-    global number_of_dice # Define a global variable to hold the number of dice, which changes
+    global rolled_list # Reference the global variable to hold the rolled numbers
+    
     while i < num_dice: # Loop through the number of dice
         number_of_dice = num_dice - len(held_numbers) # Set the number of dice to the number of dice minus the held numbers
         rolled_list = roll_dice(number_of_dice) # Roll the dice
