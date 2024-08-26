@@ -83,7 +83,8 @@ Example/Default Configuration:
         "all-six": 100,
         "all-of-kind": 70,
         "straight": 50,
-        "full-house": 50
+        "full-house": 50,
+        "no-score": 0
     }
 }
 ```
