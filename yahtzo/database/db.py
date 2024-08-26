@@ -27,6 +27,10 @@ def get_last_result(cur: sqlite3.Cursor): # Define a function to get the last re
     cur.execute('SELECT * FROM history ORDER BY id DESC LIMIT 1')
     return cur.fetchone()
 
+def get_high_score(cur: sqlite3.Cursor): # Get your high score from the database
+    cur.execute('SELECT * FROM history ORDER BY score DESC LIMIT 1')
+    return cur.fetchone()
+
 def clean(): # Define a function to clean up the database connection
     con.commit()
     con.close()

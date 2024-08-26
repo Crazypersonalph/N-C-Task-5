@@ -2,7 +2,7 @@ from yahtzo.utils.read_config import read_config
 from yahtzo.utils.roll_dice import roll_dice
 from yahtzo.utils.calculate import calculate
 
-from yahtzo.database.db import get_last_result, grab_db, store_game, clean
+from yahtzo.database.db import get_high_score, get_last_result, grab_db, store_game, clean
 
 import base64
 
@@ -26,6 +26,11 @@ num_dice = configuration.num_dice # Get the number of dice from the configuratio
 print("Welcome to Yahtzo! Let's begin!")
 try:
     print(f'You scored {get_last_result(db)[1]} points last time!') # Print the last score from the database
+except:
+    pass
+
+try:
+    print(f'Your all-time high score is {get_high_score(db)[1]}!') # Print the highest score from the database
 except:
     pass
 
@@ -86,7 +91,9 @@ def start_menu(): # Define a function to show the start menu
             # If '2' is selected, show the past games
             hist_exists: bool = False 
             for i in db.execute('SELECT * FROM history').fetchall(): # Loop through the database and print the games
+                print()
                 print(f'Game {i[0]}: {i}')
+                print()
                 hist_exists = True
             if not hist_exists: # If there are no games, print a message
                 print('Nothing to see here.')

@@ -27,6 +27,10 @@ This is due to how `2` is the order of the 1st three, and how `3` is the order o
 #### Cool, how do we see our past games?
 You can do this by selecting `2` in the main menu, which prints out all the past games you have played on the current database file.
 
+The past games are in the format:
+
+```(GAME_ID, SCORE, DATE_AND_TIME, ROLLS, HOLDS, BASE64_ENCODED_CONFIG)```
+
 ## Library Documentation
 ### Utilities
 `calculate.py`:
@@ -61,6 +65,10 @@ You can do this by selecting `2` in the main menu, which prints out all the past
 * Gets the latest game result from the database.
 * Takes a SQLite3 Cursor object.
 
+`def get_high_score(cur: sqlite3.Cursor)`
+* Gets the highest score ever achieved from the database.
+* Take a SQLite3 Cursor object as an argument
+
 ## Configuration Documentation
 
 `num_dice`
@@ -83,7 +91,8 @@ Example/Default Configuration:
         "all-six": 100,
         "all-of-kind": 70,
         "straight": 50,
-        "full-house": 50
+        "full-house": 50,
+        "no-score": 0
     }
 }
 ```

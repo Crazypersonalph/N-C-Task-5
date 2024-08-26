@@ -14,6 +14,6 @@ def calculate(score_list: list): # Define a function to calculate the score
     elif score_list.count(score_list[0]) == len(score_list)-1 or score_list.count(score_list[1]) == len(score_list)-1: # Check if the numbers are a full house
         return config.scoring['full-house']
     
-    else: # If none of the above conditions are met, return 0, due to no conditions being met for a score.
-        return 0
+    else: # If none of the above conditions are met, return no-points, due to no conditions being met for a score.
+        return config.scoring['no-score']
 
