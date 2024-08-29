@@ -24,12 +24,16 @@ You would do this by inputting `2,3` when asked for the numbers you want to hold
 
 This is due to how `2` is the order of the 1st three, and how `3` is the order of the 2nd three.
 
+![Real game example of holding](docs/holding.png)
+
 #### Cool, how do we see our past games?
 You can do this by selecting `2` in the main menu, which prints out all the past games you have played on the current database file.
 
 The past games are in the format:
 
 ```(GAME_ID, SCORE, DATE_AND_TIME, ROLLS, HOLDS, BASE64_ENCODED_CONFIG)```
+
+![A demonstration of the past game format](docs/past_game_example.png)
 
 ## Library Documentation
 ### Utilities
